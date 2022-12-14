@@ -11,7 +11,7 @@
     <div>
         <input id="txtBook" placeholder="Enter UR fav Book"/>
         <button onclick="onAddItem()">+</button>
-        <button>X</button>
+        <button onclick="">X</button>
         <button>Edit</button>
         <p id="pDisplay">
             <ol id = "list"/>
@@ -20,25 +20,44 @@
     <script>
         const populateno1 = function(){
             let p = document.getElementById("pDisplay");
-            p.innerHTML = '<ol type = "i">'
+            p.innerHTML = '<ol>'
             const data = getAll();
             for (let i = 0; i < data.length; i++) {
-                const line = `<li>${data[i]}</li>`
-                p.innerHTML = p.innerHTML + line;
-                
+                const line = `<li type="i">${data[i]}
+                <a href= "#" onclick="onDelete(${i})">X</a>
+                </li>`
+                p.innerHTML = p.innerHTML + line;    
             }
+            p.innerHTML +="</ol>"
+        }
+
+        const onDelete = function(id){
+            deleteItem(id);
+            populate();
+
+        }
+
+        const onEdit = function(id){
+            const newBook = prompt("Enter new book name..");
+            updateItem(id, newBook);
+            populate();
+
         }
        // calling the add item function
         appendItem("The History");
         appendItem("Ramayana");
         appendItem("Mahabaratha");
         appendItem("The greate India");
+        
         const populate = function(){
             let ol = document.getElementById("list");
             ol.innerHTML = "";
             const data = getAll();
             for(let i = 0; i<data.length; i++){
-                const line = `<li>${data[i]}</li>`
+                const line = `<li type = "i">${data[i]}
+                    <a href="#" onclick="onDelete(${i})">X</a>
+                    <a href="#" onclick="onEdit(${i})">Edit</a>
+                    </li>`
                 ol.innerHTML = ol.innerHTML + line;
             }
         }
@@ -46,7 +65,7 @@
             const name = document.getElementById("txtBook").value;
             appendItem(name);
             alert("Book added Successfully");
-            populateno1();
+            populate();
         }
         document.getElementById("pDisplay").innerHTML = myBooks;
     </script>
