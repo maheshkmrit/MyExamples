@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Document</title>
+    <script src="./Ex06-CrudOperation.js"></script>
+</head>
+<body>
+    <div>
+        <input id="txtBook" placeholder="Enter UR fav Book"/>
+        <button onclick="onAddItem()">+</button>
+        <button>X</button>
+        <button>Edit</button>
+        <p id="pDisplay">
+            <ol id = "list"/>
+        </p>
+    </div>
+    <script>
+        const populateno1 = function(){
+            let p = document.getElementById("pDisplay");
+            p.innerHTML = '<ol type = "i">'
+            const data = getAll();
+            for (let i = 0; i < data.length; i++) {
+                const line = `<li>${data[i]}</li>`
+                p.innerHTML = p.innerHTML + line;
+                
+            }
+        }
+       // calling the add item function
+        appendItem("The History");
+        appendItem("Ramayana");
+        appendItem("Mahabaratha");
+        appendItem("The greate India");
+        const populate = function(){
+            let ol = document.getElementById("list");
+            ol.innerHTML = "";
+            const data = getAll();
+            for(let i = 0; i<data.length; i++){
+                const line = `<li>${data[i]}</li>`
+                ol.innerHTML = ol.innerHTML + line;
+            }
+        }
+        const onAddItem = function(){
+            const name = document.getElementById("txtBook").value;
+            appendItem(name);
+            alert("Book added Successfully");
+            populateno1();
+        }
+        document.getElementById("pDisplay").innerHTML = myBooks;
+    </script>
+</body>
+</html>

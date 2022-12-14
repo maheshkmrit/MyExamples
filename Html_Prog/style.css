@@ -1,0 +1,36 @@
+a{
+    text-decoration: none;
+    font-size: large;
+    background-color: rgba(211, 211, 211, 0.301);
+    padding: 10px;
+    border-radius: 10px;
+    text-decoration-color: rgb(78, 122, 151);
+}
+nav{
+
+    background-color: rgb(46, 51, 51); 
+    
+}
+img{
+    height: 400px;
+    width: 45%;
+}
+table{
+    width: 100%;
+    text-align: center;
+}
+body {
+    background-image: url('Contents/bg.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+#nv{
+    display: block;
+    float: inline-end;
+    list-style-type: none;
+}
+li a {
+    display: block;
+    float:inline-start
+  }
