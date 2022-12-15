@@ -5,19 +5,50 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Currency Conversion</title>
+    <script>
+        function convertCurr(){
+            // const currUK = document.getElementById("uk").value;
+            // const currUSA = document.getElementById("usa").value;
+            // const currRUSSIA = document.getElementById("russia").value;
+            const curr = document.getElementById("from").value;
+            console.log(curr);
+            switch (curr){
+
+                case "Uk": const convCurr = document.getElementById("dis")
+                inner
+
+            }
+            
+
+
+        }
+    </script>
 </head>
 <body>
     <div>
+        <label for="from">From</label>
     <select id = "from">
-        <option>Uk</option>
-        <option>USA</option>
-        <option>Russia</option>
+        <option id="uk">Uk</option>
+        <option id="usa">USA</option>
+        <option id="russia">Russia</option>
     </select>
 
+    <label for="to">To</label>
     <select id = "to">
         <option>India</option>
     </select>
+
+    <label for="result">
+     
+        <!--A readonly input-->
+        </br>
+        <input type="text" name="value" value = "0" readonly id="dis">
+    </label>
+        </br>
+        <button onclick="convertCurr()">Convert</button>
+    
     </div>
+
 
 
 </body>

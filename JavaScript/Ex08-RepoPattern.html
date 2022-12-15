@@ -15,22 +15,79 @@
             <td>${emp.empSalary}</td>`;
             return row;
         }
-        window.addEventListener("load",function(){
+
+        function populate(){
             const table = document.querySelector("#tblRecords");
-            for(const emp of data){
-                table.appendChild(createRow(emp));
+            const firstRow = document.querySelector("#theading");
+            table.innerHTML="";
+            table.appendChild(firstRow);
+            for(const empD of data){
+                let row = createRow(empD);
+                table.appendChild(row);
             }
+        }
+
+        window.addEventListener("load",function(){
+            populate();
         })
+
+
+        function onEdit(){
+            const id = prompt("Enter the ID of user to edit");
+            try{
+                const foundRec = emp.getEmployee(id)
+                document.getElementById("txtId").value = foundRec.empId;
+                document.getElementById("txtName").value = foundRec.empName;
+                document.getElementById("txtAddress").value = foundRec.empAddress;
+                document.getElementById("txtSalary").value = foundRec.empSalary;
+
+            }catch(ex){
+                alert(ex);
+            }
+        }
+
+        function onSaveChanges(){
+            const id = parseInt(document.getElementById("txtId").value);
+            const name = document.getElementById("txtName").value;
+            const address = document.getElementById("txtAddress").value;
+            const salary = parseFloat(document.getElementById("txtSalary").value);
+
+            const empNEW = new Employee(id, name, address, salary);
+            try{
+                emp.updateEmployee(empNEW);
+                populate();
+            }catch(error){
+                alert(error)
+            }
+
+
+        }
+
+        function onAddRecord(){
+            const id = parseInt(prompt("Enter Employee ID"));
+            const name = prompt("Enter Employee Name");
+            const address = prompt("Enter Employee Address");
+            const salary = parseFloat(prompt("Enter Employee Salary"));
+
+            const empNew = new Employee(id, name, address, salary);
+            emp.addEmployees(empNew);
+            populate();
+        }
     </script>
 </head>
 <body>
     <h1>Employee monitoring System</h1>
+    <nav>
+        <a href="#" onclick="onEdit()">Edit Record</a>
+        <a href="#" onclick="onDelete()">Delete Record</a>
+        <a href="#" onclick="onAddRecord()">Add Record</a>
+    </nav>
     <hr>
     <div>
         <h2>List Of Employees</h2>
         <hr>
         <table border="1" id="tblRecords">
-            <tr>
+            <tr id="theading">
                 <th>Employee ID</th>
                 <th>Employee Name</th>
                 <th>Employee Address</th>
@@ -39,7 +96,50 @@
 
         </table>
     </div>
-    <div></div>
-    <div></div>
+    <div>
+        <h2>Details of the Employee</h2>
+        <p>
+            Employee ID:
+            <input id="txtId" readonly type="number">
+        </p>
+        <p>
+            Employee Name:
+            <input type="text" id="txtName">
+        </p>
+        <p>
+            Employee Address:
+            <input type="text" id="txtAddress">
+        </p>
+        <p>
+            Employee Salary:
+            <input type="text" id="txtSalary">
+        </p>
+        <p>
+            <input type="button" value="Save Changes" onclick="onSaveChanges()">
+        </p>
+        
+    </div>
+    <div>
+        <h2>Register New Employee</h2>
+        <p>
+            Employee ID:
+            <input id="txtNewId" readonly type="number">
+        </p>
+        <p>
+            Employee Name:
+            <input id="txtNewName" readonly type="number">
+        </p>
+        <p>
+            Employee Address:
+            <input id="txtNewAddress" readonly type="number">
+        </p>
+        <p>
+            Employee Salary:
+            <input id="txtNewSalary" readonly type="number">
+        </p>
+        <p>
+            <input type="button" value="Register Employee" onclick="">
+        </p>
+    </div>
 </body>
 </html>
